@@ -85,12 +85,14 @@ class LifecyclePlugin extends Transform implements Plugin<Project> {
             directoryInput.file.eachFileRecurse { File file ->
                 def name = file.name
                 if (checkClassFile(name)) {
-                    println '----------- deal with "class" file <' + name + '> -----------'
+                    println '----------- deal with "class" file <' + file.absolutePath + File.separator + name + '> -----------'
                     ClassReader classReader = new ClassReader(file.bytes)
                     ClassWriter classWriter = new ClassWriter(classReader, ClassWriter.COMPUTE_MAXS)
                     ClassVisitor cv = new LifecycleClassVisitor(classWriter)
                     classReader.accept(cv, EXPAND_FRAMES)
                     byte[] code = classWriter.toByteArray()
+                    println("====111")
+                    println(file.parentFile.absolutePath)
                     FileOutputStream fos = new FileOutputStream(
                             file.parentFile.absolutePath + File.separator + name)
                     fos.write(code)
@@ -152,6 +154,7 @@ class LifecyclePlugin extends Transform implements Plugin<Project> {
             jarFile.close()
             def dest = outputProvider.getContentLocation(jarName + md5Name,
                     jarInput.contentTypes, jarInput.scopes, Format.JAR)
+            println("222目标文件：" + dest.getAbsolutePath())
             FileUtils.copyFile(tmpFile, dest)
             tmpFile.delete()
         }

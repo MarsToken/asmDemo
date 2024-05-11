@@ -3,10 +3,12 @@
   <groupId>com.gavin.plugin</groupId>
   <artifactId>lifecycle-plugin</artifactId>
   <versioning>
-    <release>0.0.1</release>
+    <release>0.0.3</release>
     <versions>
       <version>0.0.1</version>
+      <version>0.0.2</version>
+      <version>0.0.3</version>
     </versions>
-    <lastUpdated>20190221081338</lastUpdated>
+    <lastUpdated>20240509111603</lastUpdated>
   </versioning>
 </metadata>
